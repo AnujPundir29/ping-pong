@@ -7,8 +7,9 @@ const socketServer = io(httpServer);
 
 const sockets = require('./sockets');
 
-httpServer.listen(3000, () => {
-    console.log('listening on port 3000')
+const PORT = process.env.PORT || 8000;
+httpServer.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
 });
 
 sockets.listen(socketServer);
