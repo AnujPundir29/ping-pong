@@ -1,7 +1,8 @@
 let countPlayer = 0;
 
 function listen(io) {
-    io.on('connection', (socket) => {
+    const pongNamespace = io.of('/pong');  // only listen to pong namespace
+    pongNamespace.on('connection', (socket) => {
         console.log('a user got connected ' + socket.id);
 
         socket.on('ready', () => {
@@ -11,7 +12,7 @@ function listen(io) {
 
             if (countPlayer % 2 === 0) {
                 // broadcast start game to all clients
-                io.emit('startGame', socket.id);
+                pongNamespace.emit('startGame', socket.id);
             }
         });
 
